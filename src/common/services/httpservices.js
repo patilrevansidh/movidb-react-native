@@ -1,5 +1,5 @@
 import Toast from 'react-native-simple-toast';
-import {stringConstants} from '../constants';
+import {stringConstant} from '../constants';
 
 const TOKEN = 'ACCESS_TOKEN', UNAUTHORIZED = "Unauthorized", FCM_TOKEN = "FCM_TOKEN",
     HIERARCHY = 'HIERARCHY', LOGIN_TYPE='LOGIN_TYPE';
@@ -17,7 +17,7 @@ let obj = {
 };
 
 function doHttpCall(url, method, body={}) {
-    const NEW_URL = stringConstants.BASE_URL + url;
+    const NEW_URL = stringConstant.BASE_URL + url;
 
     const promise = new Promise((resolve, reject) => {
         // isOnline()
