@@ -1,10 +1,11 @@
 import Toast from 'react-native-simple-toast';
 import {stringConstant} from '../constants';
+import {NetInfo} from 'react-native';
 
 const TOKEN = 'ACCESS_TOKEN', UNAUTHORIZED = "Unauthorized", FCM_TOKEN = "FCM_TOKEN",
     HIERARCHY = 'HIERARCHY', LOGIN_TYPE='LOGIN_TYPE';
 let ONLINE_STATUS = undefined;
-
+    
 let obj = {
     get (url) {
         const METHOD = 'get';
@@ -20,10 +21,14 @@ function doHttpCall(url, method, body={}) {
     const NEW_URL = stringConstant.BASE_URL + url;
 
     const promise = new Promise((resolve, reject) => {
-        // isOnline()
-        // .then(()=> {
+        isOnline()
+        .then(()=> {
             let options = {
-                method : method
+                method : method,
+                headers :{
+                    api_key:'d1de133b3eef02b32c3dc1b647351c96'
+                }
+
             };
 
             if (method === 'post') {
@@ -31,32 +36,22 @@ function doHttpCall(url, method, body={}) {
             }
 
                        
-            options.headers = new Headers();
-            options.headers.append('api_key', 'd1de133b3eef02b32c3dc1b647351c96');                
-    
+            // options.headers = new Headers();
+            // options.headers.append('api_key', 'd1de133b3eef02b32c3dc1b647351c96');                
 
             fetch(NEW_URL, options)
-            .then(checkStatus)
+            // .then(checkStatus)
             .then((response) => {
-                if (response.status === true) {
-                    resolve(response);
-                } else {
-                    if(response.errorCode) {
-                        reject(response);
-                    }else {                                       
-                        Toast.show(response.errorMessage, Toast.LONG);
-                        reject(response);
-                    }             
-                }
+               resolve(response)
             }).catch((message)=> {
                 Toast.show(message.message, Toast.LONG);
                 reject(message);
             });
            
-        // }).catch ((message)=> {
-        //     Toast.show(message.message, Toast.LONG);
-        //     reject(message);
-        // });
+        }).catch ((message)=> {
+            Toast.show(message.message, Toast.LONG);
+            reject(message);
+        });
     });
 
     return promise;

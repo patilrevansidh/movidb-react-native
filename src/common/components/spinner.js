@@ -1,5 +1,5 @@
 import React from 'react';
-import {Spinner as NativebaseSpinner} from 'native-base';
+import {Spinner as NativebaseSpinner, View, Text} from 'native-base';
 import {StyleSheet} from 'react-native';
 
 const spinnerStyle = {
@@ -19,6 +19,7 @@ const spinnerStyle = {
 }
 
 const Spinner = (props) => {
+    const message = props.message ? props.message : 'Loading...'
     return (
         <View style={spinnerStyle.container}>
             <View style={spinnerStyle.spinnerMessageHolder}>
