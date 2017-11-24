@@ -1,20 +1,29 @@
 import React, { Component } from 'react';
 import {Container, Content} from 'native-base';
-import CardScreen from './screen';
-import Toast from 'react-native-simple-toast';
 import { connect } from "react-redux";
 import {Spinner} from '../../../common/components';
 import MoviList from '../list/list';
+import {fetchMovieList} from './action';
 
 
 class CardContainer extends Component {
+    componentDidMount() {
+        this.fetchList()   
+    }
+
+    async fetchList() {
+        this.props.fetchMovieList();
+    }
+   
     render() {
-        return (
-            <Container>
-                <Content>
-                    <MoviList onDetailPress={this.handleDetailPress.bind(this)}/>
-                </Content>
-            </Container>
+        if(this.props.list.showLoader) {
+            return <Spinner/>
+        }
+        return (           
+            <MoviList 
+                catergories={this.props.list.catergories}
+                data={this.props.list.list}
+                onDetailPress={this.handleDetailPress.bind(this)}/>              
         );
     }
 
@@ -24,6 +33,15 @@ class CardContainer extends Component {
     
 }
 
+const mapStateToProps = (state) =>({
+    list : state.listReducer
+});
+
+const mapDispatchToProps = (dispatch) =>({
+    fetchMovieList : ()=>{
+        dispatch(fetchMovieList());
+    }
+});
 
 
-export default CardContainer;
+export default connect(mapStateToProps,mapDispatchToProps)(CardContainer);

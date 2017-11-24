@@ -11,6 +11,6 @@ const obj = {
     getCategories() {
         const url =`genre/movie/list?api_key=${API_KEY}&language=en-US`;
         return httpservices.get(url);
-    }
+    },
 }
 export default obj;

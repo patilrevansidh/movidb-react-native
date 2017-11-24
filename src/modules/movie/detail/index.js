@@ -1,8 +1,19 @@
 import React, { Component } from 'react';
 import {View, Image} from 'react-native';
 import {Container, Content, Text} from 'native-base';
+import detailService from './service';
 
 class Detail extends Component {
+    componentDidMount() {
+        this.fetchDetail();
+    }
+    
+    async fetchDetail() {
+        const id = this.props.navigation.state.params.movieId;
+        const result = await detailService.getMovieDetail(id)
+        console.log(result);
+    }
+
     render() {
         return (
             <Container>

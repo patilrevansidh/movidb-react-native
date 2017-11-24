@@ -12,7 +12,9 @@ const obj = {
     API_KEY:'d1de133b3eef02b32c3dc1b647351c96',
     LIST_ID:1,
     IMAGE_BASE_URL_BANNER:'https://image.tmdb.org/t/p/w500/',
-    IMAGE_BASE_URL_INST:' http://image.tmdb.org/t/p/w185/'
+    IMAGE_BASE_URL_INST:' http://image.tmdb.org/t/p/w185/',
+    PRIMARY_FONT_COLOR:'#000',
+    SECONDARY_FONT_COLOR:'#404040'
 }
 
 export default obj;
