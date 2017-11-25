@@ -1,37 +1,42 @@
 import React, { Component } from 'react';
 import {View, Image} from 'react-native';
-import {Container, Content, Text} from 'native-base';
 import detailService from './service';
+import DetailScreen from './screen';
+import {Spinner} from '../../../common/components';
+import {fetchMovieDetail} from './action';
+import { connect } from "react-redux";
 
 class Detail extends Component {
+    state = {detail:''}
     componentDidMount() {
         this.fetchDetail();
     }
     
-    async fetchDetail() {
+    fetchDetail() {
         const id = this.props.navigation.state.params.movieId;
-        const result = await detailService.getMovieDetail(id)
-        console.log(result);
+        this.props.fetchMovieDetail(id);
     }
 
     render() {
+        if(this.props.movieDetail.dowLoaded)  {
+            return <DetailScreen data={this.props.movieDetail.movie}/>
+        }
+                    
+                  
         return (
-            <Container>
-                <Content>
-                    <View style={{flex:1}}>
-                        <Image style={{height:200}} source={require('../../../common/assets/images/inception_movie_poster_banner_01.jpg')}/>
-                        <View style={{position:'relative',margin:10, marginTop:-75}}>
-                            <Image style={{width:100,height:150}} source={require('../../../common/assets/images/inception_movie_poster_banner_01.jpg')}/>                            
-                        </View>
-                        <View style={{position:'absolute',marginTop:225,marginLeft:150,flexDirection:'row'}}>
-                            <Text style={{fontWeight:'bold',fontSize:20}}> Boomer</Text>
-                            <Text note style={{fontWeight:'bold',fontSize:20}}> (2017)</Text>
-                        </View>
-                    </View>
-                </Content>
-            </Container>
+            <View style={{flex:1}}>
+                <Spinner/>
+            </View>           
         );
     }
 }
 
-export default Detail;
+const mapDispatchToProps = (dispatch) =>({
+    fetchMovieDetail : (id)=>{
+        dispatch(fetchMovieDetail(id));
+    }
+});
+const mapStateToProps = (state) =>({
+    movieDetail : state.movieDetail
+});
+export default connect(mapStateToProps,mapDispatchToProps)(Detail);

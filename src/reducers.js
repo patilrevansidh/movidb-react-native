@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import nav from './nav';
 import listReducer from './modules/movie/list/reducer';
+import {movieDetail} from './modules/movie/detail/reducer'
 
 const appReducer = combineReducers({
     nav,
-    listReducer
+    listReducer,
+    movieDetail
 });
 
 const initialState = appReducer({}, {});

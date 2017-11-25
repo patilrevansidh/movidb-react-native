@@ -9,6 +9,8 @@ const initState = {
 const movieListReducer = (state=initState,action)=>{
 
     switch(action.type) {
+        case 'persist/REHYDRATE' :
+            return {...action.payload.listReducer,showLoader:false}
         case FETCHING_MOVIE_LIST :
             return {...state, showLoader:true};
         

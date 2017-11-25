@@ -24,7 +24,7 @@ const CardScreen = (props) => {
         <Card>     
             <Image style={{height:175}} source={{uri:`${stringConstant.IMAGE_BASE_URL_BANNER}${props.data.backdrop_path}`}}/>                  
             <CardItem>
-                <OverView category={props.category} data={props.data} onDetailPress={()=>props.onDetailPress(props.data.id)}/>
+                <OverView category={props.category} data={props.data} onDetailPress={()=>props.onDetailPress(props.data.id, props.data.original_title)}/>
             </CardItem>
         </Card>
     );

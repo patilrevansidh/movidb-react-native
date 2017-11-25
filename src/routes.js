@@ -6,6 +6,6 @@ import MovieDetail from './modules/movie/detail';
 export const Root = StackNavigator({
     Home : {screen:Home,navigationOptions:{header:null}},
     MovieList :{screen:List,navigationOptions:{title:'Movies'}},
-    MovieDetail : {screen:MovieDetail,navigationOptions:{title:'Details'}}
+    MovieDetail : {screen:MovieDetail,navigationOptions:{title:'Movie Detail'}}
 
 });

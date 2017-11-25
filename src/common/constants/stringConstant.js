@@ -14,7 +14,7 @@ const obj = {
     IMAGE_BASE_URL_BANNER:'https://image.tmdb.org/t/p/w500/',
     IMAGE_BASE_URL_INST:' http://image.tmdb.org/t/p/w185/',
     PRIMARY_FONT_COLOR:'#000',
-    SECONDARY_FONT_COLOR:'#404040'
+    SECONDARY_FONT_COLOR:'#404040',
 }
 
 export default obj;
