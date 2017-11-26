@@ -7,6 +7,10 @@ import {fetchMovieDetail} from './action';
 import { connect } from "react-redux";
 
 class Detail extends Component {
+    static navigationOptions = ({ navigation, screenProps }) => ({
+        title: navigation.state.params.movieTitle
+      });
+
     state = {detail:'',crew:{}}
     componentDidMount() {
         this.fetchDetail();

@@ -24,7 +24,6 @@ const DetailScreen = (props) => {
                 crews.push(obj);
            }
         }).filter(d=>d)
-        console.log(crews,"ghe hatat");
 
        return (                         
         <Container>

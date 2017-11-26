@@ -28,7 +28,7 @@ class CardContainer extends Component {
     }
 
     handleDetailPress(id,movieTitle) {
-        this.props.navigation.navigate('MovieDetail',{movieId:id,movieTitle});
+        this.props.navigation.navigate('MovieDetail',{movieId:id,movieTitle:movieTitle});
     }
     
 }
