@@ -7,7 +7,8 @@ import {
 const initState = {
     showLoader : undefined,
     movie :{},
-    dowLoaded:false
+    dowLoaded:false,
+    crew:{}
 }
 
 export const movieDetail = (state=initState,action)=>{
@@ -15,7 +16,7 @@ export const movieDetail = (state=initState,action)=>{
         case FETCHING_MOVIE :
             return {...state, showLoader:true, dowLoaded:false}
         case FETCH_MOVIE_DETAIL_SUCCESS :
-            return {...state, movie :JSON.parse(action.payload.movie), showLoader:false, dowLoaded:true}
+            return {...state, movie :JSON.parse(action.payload.movie), crew:JSON.parse(action.payload.crew), showLoader:false, dowLoaded:true}
         case FETCH_MOVIE_DETAIL_FAIL :
             return {...state, showLoader:false,dowLoaded:false}
         default :

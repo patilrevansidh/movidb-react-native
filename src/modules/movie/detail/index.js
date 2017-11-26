@@ -7,7 +7,7 @@ import {fetchMovieDetail} from './action';
 import { connect } from "react-redux";
 
 class Detail extends Component {
-    state = {detail:''}
+    state = {detail:'',crew:{}}
     componentDidMount() {
         this.fetchDetail();
     }
@@ -19,15 +19,19 @@ class Detail extends Component {
 
     render() {
         if(this.props.movieDetail.dowLoaded)  {
-            return <DetailScreen data={this.props.movieDetail.movie}/>
+            return <DetailScreen 
+                        crew={this.props.movieDetail.crew.crew}
+                        data={this.props.movieDetail.movie}/>
         }
                     
-                  
-        return (
-            <View style={{flex:1}}>
-                <Spinner/>
-            </View>           
-        );
+        if(this.props.movieDetail.showLoader){
+            return (
+                <View style={{flex:1}}>
+                    <Spinner/>
+                </View>           
+            );
+        }        
+        return null;
     }
 }
 
