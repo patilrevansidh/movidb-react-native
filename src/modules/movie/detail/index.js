@@ -3,8 +3,12 @@ import {View, Image} from 'react-native';
 import detailService from './service';
 import DetailScreen from './screen';
 import {Spinner} from '../../../common/components';
-import {fetchMovieDetail} from './action';
+import {fetchMovieDetail,} from './action';
 import { connect } from "react-redux";
+import {stringConstant} from '../../../common/constants';
+import util from '../../../common/helper/util';
+import {markBookAction, markFavAction} from '../list/action';
+
 
 class Detail extends Component {
     static navigationOptions = ({ navigation, screenProps }) => ({
@@ -24,6 +28,8 @@ class Detail extends Component {
     render() {
         if(this.props.movieDetail.dowLoaded)  {
             return <DetailScreen 
+                        isBookMarked = {this.props.list.bookmarks.includes(this.props.navigation.state.params.movieId)}
+                        isFavMarked = {this.props.list.favorites.includes(this.props.navigation.state.params.movieId)}
                         onFooterPress={this.handleFooterPress.bind(this)}
                         showModal={this.state.showModal}
                         crew={this.props.movieDetail.crew.crew}
@@ -41,16 +47,41 @@ class Detail extends Component {
     }
 
     handleFooterPress(item,id) {
-        console.log("item",item,"id",id);
+       switch(item) {
+         case stringConstant.FAVORITE :
+             let favorites = [];
+                 favorites=this.props.list.favorites;
+                 favorites = util.uniqueCalculator(favorites,id);
+             this.props.markFavAction(favorites);
+             console.log("favorites",favorites)
+             break;
+         case stringConstant.BOOKMARK :
+            let bookmarks=[];
+                bookmarks = this.props.list.bookmarks;
+                bookmarks = util.uniqueCalculator(bookmarks,id);
+            this.props.markBookAction(bookmarks);
+            console.log("favorites",bookmarks)
+            break;
+         default :
+             break;
+       }
     }
 }
 
 const mapDispatchToProps = (dispatch) =>({
     fetchMovieDetail : (id)=>{
         dispatch(fetchMovieDetail(id));
+    },
+    markFavAction : (list)=>{
+        dispatch(markFavAction(list));
+    },
+    markBookAction : (list)=>{
+        dispatch(markBookAction(list));
     }
 });
 const mapStateToProps = (state) =>({
-    movieDetail : state.movieDetail
+    movieDetail : state.movieDetail,
+    list : state.listReducer
+
 });
 export default connect(mapStateToProps,mapDispatchToProps)(Detail);

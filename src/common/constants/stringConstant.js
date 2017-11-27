@@ -16,7 +16,11 @@ const obj = {
     PRIMARY_FONT_COLOR:'#000',
     SECONDARY_FONT_COLOR:'#404040',
     GREY_COLOR:'#D3D3D3',
-    SEARCH_PLACEHOLDER:'Search movies'
+    SEARCH_PLACEHOLDER:'Search movies',
+    FAVORITE :'favorite',
+    BOOKMARK:'bookmark',
+    VIDEO:'video',
+    ALBUM:'album'
 }
 
 export default obj;

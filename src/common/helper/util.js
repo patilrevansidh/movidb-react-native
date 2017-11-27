@@ -1,5 +1,4 @@
 const obj = {
-
     calCategory (ids=[],category=[]) {
         let categories = ''
         const a = ids.map((c)=>{
@@ -12,7 +11,12 @@ const obj = {
                 }).filter(d=>d)
         }); 
         return categories;           
+    },
+    uniqueCalculator(arr=[],id) {
+        const index = arr.length ? arr.findIndex((m)=> m == id) : -1;
+        return index < 0 ? [...arr,id] : arr.filter(m => id != m);
     }
+
 }
 
 export default obj;

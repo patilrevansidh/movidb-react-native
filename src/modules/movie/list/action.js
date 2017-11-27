@@ -6,6 +6,13 @@ export const FETCH_MOVIE_LIST_FAIL = 'FETCH_MOVIE_LIST_FAIL';
 export const SEARCHING='SEARCHIING';
 export const SEARCH_SUCCESS='SEARCH_SUCCESS';
 export const SEARCH_FAIL='SEARCH_FAIL';
+export const MARKING_FAV = 'MARKING_FAV';
+export const MARK_FAV_SUCCESS = 'MARK_FAV_SUCCESS';
+export const MARK_FAV_FAIL = 'MARK_FAV_FAIL';
+export const MARKING_BOOK = 'MARKING_BOOK';
+export const MARK_BOOK_SUCCESS = 'MARK_BOOK_SUCCESS';
+export const MARRK_BOOK_FAIL = 'MARRK_BOOK_FAIL';
+
 
 export const fetchMovieList = ()=> {
     return async(dispatch) => {
@@ -30,6 +37,28 @@ export const searchMovieList = (text)=> {
         } catch (error) {      
             console.log(error)      
             dispatch({type : SEARCH_FAIL});
+        }
+    }
+}
+
+export const markFavAction = (list) =>{
+    return async (dispatch)=>{
+        try {
+            dispatch({type:MARKING_FAV});
+            dispatch({type:MARK_FAV_SUCCESS,payload:list})        
+        } catch (error) {
+            dispatch({type:MARK_FAV_FAIL})
+        }
+    }
+}
+
+export const markBookAction = (list) =>{
+    return async (dispatch)=>{
+        try {
+            dispatch({type:MARKING_BOOK});
+            dispatch({type:MARK_BOOK_SUCCESS,payload:list})        
+        } catch (error) {
+            dispatch({type:MARRK_BOOK_FAIL})
         }
     }
 }

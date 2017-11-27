@@ -83,53 +83,53 @@ const DetailScreen = (props) => {
                     </View>
                 </Card>
             </View>
-            </Content>           
-           {/* <FooterTab data={props.data} onFooterPress={props.onFooterPress}/> */}
-           <Footer style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
-            <FooterTab style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
-                <Button onPress={()=>props.onFooterPress('fav',props.data.id)}>
-                    <IoniIcons name="ios-bookmark" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                </Button>
-                <Button onPress={()=>props.onFooterPress('book',props.data.id)}>
-                    <IoniIcons name="md-heart" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                </Button>
-                <Button onPress={()=>props.onFooterPress('playTrailer',props.data.id)}>
-                    <IoniIcons name="md-videocam" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                </Button>
-                <Button onPress={()=>props.onFooterPress('album',props.data.id)}>
-                    <IoniIcons name="md-images" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                </Button>
-            </FooterTab>
-        </Footer>
-    
+            </Content>  
+            <Footer style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>         
+                <FooterComponent 
+                    isFavMarked={props.isFavMarked}
+                    isBookMarked={props.isBookMarked} 
+                    data={props.data} 
+                    onFooterPress={props.onFooterPress}/>           
+            </Footer>
         </Container>                                         
         ) 
 };
 
 const FooterComponent = (props)=>{
-    return(
-        <Footer style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
-            <FooterTab style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
-                <Button onPress={()=>props.onFooterPress('fav',props.data.id)}>
-                    <IoniIcons name="ios-bookmark" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                </Button>
-                <Button onPress={()=>props.onFooterPress('book',props.data.id)}>
-                    <IoniIcons name="md-heart" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                </Button>
-                <Button onPress={()=>props.onFooterPress('playTrailer',props.data.id)}>
-                    <IoniIcons name="md-videocam" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                </Button>
-                <Button onPress={()=>props.onFooterPress('album',props.data.id)}>
-                    <IoniIcons name="md-images" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                </Button>
-            </FooterTab>
-        </Footer>
+    return(       
+        <FooterTab style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
+            <FooterButton
+                onFooterPress={props.onFooterPress}
+                type={stringConstant.BOOKMARK}
+                isHighLight={props.isBookMarked} 
+                iconName="ios-bookmark"
+                data ={props.data}/>
+            <FooterButton
+                onFooterPress={props.onFooterPress}
+                isHighLight={props.isFavMarked}
+                type={stringConstant.FAVORITE}
+                iconName="md-heart"
+                data ={props.data}/>
+            <FooterButton
+                isHighLight={false}
+                onFooterPress={props.onFooterPress}
+                type={stringConstant.VIDEO}
+                iconName="md-videocam"
+                data ={props.data}/>
+            <FooterButton
+                isHighLight={false}
+                onFooterPress={props.onFooterPress}
+                type={stringConstant.ALBUM}
+                iconName="md-images"
+                data ={props.data}/>
+        </FooterTab>        
     )
 }
 const FooterButton = (props) =>{
+    const color = props.isHighLight ? stringConstant.APP_YELLOW_COLOR : stringConstant.APP_FONT_COLOR;
     return (
     <Button onPress={()=>props.onFooterPress(props.type,props.data.id)}>
-        <IoniIcons name={props.iconName || "ios-bookmark"} size={30} color={stringConstant.APP_FONT_COLOR}/>
+        <IoniIcons name={props.iconName} size={30} color={color}/>
     </Button>
     )
 }
