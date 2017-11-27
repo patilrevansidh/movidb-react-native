@@ -11,7 +11,7 @@ class Detail extends Component {
         title: navigation.state.params.movieTitle
       });
 
-    state = {detail:'',crew:{}}
+    state = {detail:'',crew:{},showLoader:false}
     componentDidMount() {
         this.fetchDetail();
     }
@@ -24,6 +24,8 @@ class Detail extends Component {
     render() {
         if(this.props.movieDetail.dowLoaded)  {
             return <DetailScreen 
+                        onFooterPress={this.handleFooterPress.bind(this)}
+                        showModal={this.state.showModal}
                         crew={this.props.movieDetail.crew.crew}
                         data={this.props.movieDetail.movie}/>
         }
@@ -36,6 +38,10 @@ class Detail extends Component {
             );
         }        
         return null;
+    }
+
+    handleFooterPress(item,id) {
+        console.log("item",item,"id",id);
     }
 }
 

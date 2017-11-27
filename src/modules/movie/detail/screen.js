@@ -5,6 +5,7 @@ import IoniIcons from 'react-native-vector-icons/Ionicons';
 import {stringConstant} from '../../../common/constants';
 import {PrimaryText, SecondaryText} from '../../../common/components/text';
 import moment from 'moment';
+import TryModal from './Modal';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const FIELDS = ['Screenplay','Writer','Director','Story'];
@@ -24,16 +25,17 @@ const DetailScreen = (props) => {
                 crews.push(obj);
            }
         }).filter(d=>d)
-
+        const img =   props.data.backdrop_path 
+                        ? <Image style={{height:275,width:stringConstant.SCREEN_WIDTH}} source={{uri:`${stringConstant.IMAGE_BASE_URL_BANNER}${props.data.backdrop_path}`}}/>
+                        : props.data.poster_path ? <Image style={{height:275,width:stringConstant.SCREEN_WIDTH}} source={{uri:`${stringConstant.IMAGE_BASE_URL_BANNER}${props.data.poster_path}`}}/> 
+                        : <Image style={{height:275,width:stringConstant.SCREEN_WIDTH}} source={require('../../../common/assets/images/noImage.jpg')}/>   
        return (                         
         <Container>
             <Content>
             <View style={{flex:1}} >
                 <Card style={{flex:3}}>
                     <View style={{flex:1,alignItems:'center'}}>                     
-                            <Image             
-                                style={{height:275,width:stringConstant.SCREEN_WIDTH}}                   
-                                source={{uri:posterPathUrl}}/>
+                            {img}
                     </View>                                       
                 </Card>
                 <Card style={{flex:1}}>
@@ -82,25 +84,55 @@ const DetailScreen = (props) => {
                 </Card>
             </View>
             </Content>           
-            <Footer style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
-                <FooterTab style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
-                   <Button>
-                       <IoniIcons name="ios-bookmark" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                   </Button>
-                   <Button>
-                       <IoniIcons name="md-heart" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                   </Button>
-                   <Button>
-                       <IoniIcons name="md-videocam" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                   </Button>
-                   <Button>
-                       <IoniIcons name="md-images" size={30} color={stringConstant.APP_FONT_COLOR}/>
-                   </Button>
-                </FooterTab>
-            </Footer>
+           {/* <FooterTab data={props.data} onFooterPress={props.onFooterPress}/> */}
+           <Footer style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
+            <FooterTab style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
+                <Button onPress={()=>props.onFooterPress('fav',props.data.id)}>
+                    <IoniIcons name="ios-bookmark" size={30} color={stringConstant.APP_FONT_COLOR}/>
+                </Button>
+                <Button onPress={()=>props.onFooterPress('book',props.data.id)}>
+                    <IoniIcons name="md-heart" size={30} color={stringConstant.APP_FONT_COLOR}/>
+                </Button>
+                <Button onPress={()=>props.onFooterPress('playTrailer',props.data.id)}>
+                    <IoniIcons name="md-videocam" size={30} color={stringConstant.APP_FONT_COLOR}/>
+                </Button>
+                <Button onPress={()=>props.onFooterPress('album',props.data.id)}>
+                    <IoniIcons name="md-images" size={30} color={stringConstant.APP_FONT_COLOR}/>
+                </Button>
+            </FooterTab>
+        </Footer>
+    
         </Container>                                         
         ) 
 };
+
+const FooterComponent = (props)=>{
+    return(
+        <Footer style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
+            <FooterTab style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>
+                <Button onPress={()=>props.onFooterPress('fav',props.data.id)}>
+                    <IoniIcons name="ios-bookmark" size={30} color={stringConstant.APP_FONT_COLOR}/>
+                </Button>
+                <Button onPress={()=>props.onFooterPress('book',props.data.id)}>
+                    <IoniIcons name="md-heart" size={30} color={stringConstant.APP_FONT_COLOR}/>
+                </Button>
+                <Button onPress={()=>props.onFooterPress('playTrailer',props.data.id)}>
+                    <IoniIcons name="md-videocam" size={30} color={stringConstant.APP_FONT_COLOR}/>
+                </Button>
+                <Button onPress={()=>props.onFooterPress('album',props.data.id)}>
+                    <IoniIcons name="md-images" size={30} color={stringConstant.APP_FONT_COLOR}/>
+                </Button>
+            </FooterTab>
+        </Footer>
+    )
+}
+const FooterButton = (props) =>{
+    return (
+    <Button onPress={()=>props.onFooterPress(props.type,props.data.id)}>
+        <IoniIcons name={props.iconName || "ios-bookmark"} size={30} color={stringConstant.APP_FONT_COLOR}/>
+    </Button>
+    )
+}
 
 const CrewMembers=(props)=>{
     const members = [];

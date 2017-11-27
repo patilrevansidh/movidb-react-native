@@ -19,10 +19,14 @@ const cardStyles = StyleSheet.create({
     }
 });
 
-const CardScreen = (props) => {    
+const CardScreen = (props) => {  
+    const img =   props.data.backdrop_path 
+                  ? <Image style={{height:175}} source={{uri:`${stringConstant.IMAGE_BASE_URL_BANNER}${props.data.backdrop_path}`}}/>
+                  : props.data.poster_path ? <Image style={{height:175}} source={{uri:`${stringConstant.IMAGE_BASE_URL_BANNER}${props.data.poster_path}`}}/> 
+                  : <Image style={{height:175}} source={require('../../../../common/assets/images/noImage.jpg')}/>
     return (
         <Card>     
-            <Image style={{height:175}} source={{uri:`${stringConstant.IMAGE_BASE_URL_BANNER}${props.data.backdrop_path}`}}/>                  
+            {img}
             <CardItem>
                 <OverView category={props.category} data={props.data} onDetailPress={()=>props.onDetailPress(props.data.id, props.data.original_title)}/>
             </CardItem>

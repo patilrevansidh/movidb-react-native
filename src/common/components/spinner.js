@@ -1,11 +1,12 @@
 import React from 'react';
 import {Spinner as NativebaseSpinner, View, Text} from 'native-base';
 import {StyleSheet} from 'react-native';
+import {PrimaryText} from './'
+import { stringConstant } from '../constants/index';
 
 const spinnerStyle = {
     container : {
         flex : 1,
-        backgroundColor:'#FFF',
         justifyContent : 'center',
         alignContent : 'center'
     },
@@ -19,14 +20,14 @@ const spinnerStyle = {
 }
 
 const Spinner = (props) => {
-    const message = props.message ? props.message : 'Loading...'
+    const message = props.message ? `${props.message}` : 'Loading...'
     return (
         <View style={spinnerStyle.container}>
             <View style={spinnerStyle.spinnerMessageHolder}>
                 <NativebaseSpinner />
-                <Text style={spinnerStyle.messageHolder}>
+                <PrimaryText style={{color:stringConstant.PRIMARY_FONT_COLOR,textAlign:'center'}}>
                     {message}
-                </Text>
+                </PrimaryText>
             </View>
         </View>
     );

@@ -2,26 +2,19 @@ import React, { Component } from 'react';
 import {View,Modal,TouchableOpacity,Text} from 'react-native';
 
 class ImageModal extends Component {
-    state = {    modalVisible: false    }
     render() {
         return (
-            <View style={{marginTop: 22}}>
+            <View style={{marginTop: 22,justifyCenter:'center',alignItems:'center'}}>
         <Modal
           animationType="slide"
-          transparent={false}
-          visible={this.state.modalVisible}
+          transparent={true}
+          visible={this.props.modalVisible}
           onRequestClose={() => {alert("Modal has been closed.")}}
           >
-         <View style={{marginTop: 22}}>
-          <View>
-            <Text>Hello World!</Text>
-
-            <TouchableOpacity onPress={() => {
-              this.setModalVisible(!this.state.modalVisible)
-            }}>
-              <Text>Hide Modal</Text>
-            </TouchableOpacity>
-
+         <View style={{flex:1,justifyCenter:'center',alignItems:'center'}}>
+          <View style={
+            {flex:1,justifyContent:'center'}}>
+            <Text style={{textAlign:'center'}}>Hello World!</Text>
           </View>
          </View>
         </Modal>
