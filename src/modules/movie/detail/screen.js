@@ -5,7 +5,6 @@ import IoniIcons from 'react-native-vector-icons/Ionicons';
 import {stringConstant} from '../../../common/constants';
 import {PrimaryText, SecondaryText} from '../../../common/components/text';
 import moment from 'moment';
-import TryModal from './Modal';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const FIELDS = ['Screenplay','Writer','Director','Story'];
