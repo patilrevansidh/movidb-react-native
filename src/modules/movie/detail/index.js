@@ -31,7 +31,6 @@ class Detail extends Component {
                         isBookMarked = {this.props.list.bookmarks.includes(this.props.navigation.state.params.movieId)}
                         isFavMarked = {this.props.list.favorites.includes(this.props.navigation.state.params.movieId)}
                         onFooterPress={this.handleFooterPress.bind(this)}
-                        showModal={this.state.showModal}
                         crew={this.props.movieDetail.crew.crew}
                         data={this.props.movieDetail.movie}/>
         }
