@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Content,View, Text, Card, Footer, FooterTab, Button} from 'native-base';
-import {Image, ListView} from 'react-native';
+import {Image, ListView, StyleSheet} from 'react-native';
 import IoniIcons from 'react-native-vector-icons/Ionicons';
 import {stringConstant} from '../../../common/constants';
 import {PrimaryText, SecondaryText} from '../../../common/components/text';
@@ -9,6 +9,23 @@ import TryModal from './Modal';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const FIELDS = ['Screenplay','Writer','Director','Story'];
+const detailStyles = StyleSheet.create({
+    posterImgStyle : {
+        height:275,
+        width:stringConstant.SCREEN_WIDTH
+    },
+    userScoreStyle : {
+        position:'absolute',
+        marginTop:15,
+        marginLeft:10
+    },
+    userScoreHolder : {
+        flex:1,
+        alignItems:'flex-end',
+        justifyContent:'center',
+        marginRight:8
+    }
+})
 
 
 const DetailScreen = (props) => {
@@ -26,9 +43,9 @@ const DetailScreen = (props) => {
            }
         }).filter(d=>d)
         const img =   props.data.backdrop_path 
-                        ? <Image style={{height:275,width:stringConstant.SCREEN_WIDTH}} source={{uri:`${stringConstant.IMAGE_BASE_URL_BANNER}${props.data.backdrop_path}`}}/>
-                        : props.data.poster_path ? <Image style={{height:275,width:stringConstant.SCREEN_WIDTH}} source={{uri:`${stringConstant.IMAGE_BASE_URL_BANNER}${props.data.poster_path}`}}/> 
-                        : <Image style={{height:275,width:stringConstant.SCREEN_WIDTH}} source={require('../../../common/assets/images/noImage.jpg')}/>   
+                        ? <Image style={detailStyles.posterImgStyle} source={{uri:`${stringConstant.IMAGE_BASE_URL_BANNER}${props.data.backdrop_path}`}}/>
+                        : props.data.poster_path ? <Image style={detailStyles.posterImgStyle} source={{uri:`${stringConstant.IMAGE_BASE_URL_BANNER}${props.data.poster_path}`}}/> 
+                        : <Image style={detailStyles.posterImgStyle} source={require('../../../common/assets/images/noImage.jpg')}/>   
        return (                         
         <Container>
             <Content>
@@ -48,40 +65,19 @@ const DetailScreen = (props) => {
                                     </SecondaryText>
                                 </PrimaryText>                            
                         </View>
-                        <View style={{flex:1,alignItems:'flex-end',justifyContent:'center',marginRight:8}}>
-                            <AnimatedCircularProgress
-                                    size={50}
-                                    width={4}
-                                    fill={props.data.vote_average*10}
-                                    tintColor={stringConstant.PRIMARY_FONT_COLOR}
-                                    backgroundColor={stringConstant.GREY_COLOR}>
-                                    {
-                                        (fill) => (
+                        <View style={detailStyles.userScoreHolder}>
+                            <AnimatedCircularProgress size={50} width={4} fill={props.data.vote_average*10} tintColor={stringConstant.PRIMARY_FONT_COLOR} backgroundColor={stringConstant.GREY_COLOR}>
+                                    {(fill) => (
                                         <SecondaryText style={{position:'absolute',marginTop:15,marginLeft:10}}>
                                             { props.data.vote_average*10}%
                                         </SecondaryText>
                                         )
                                     }
-                                    </AnimatedCircularProgress>
+                            </AnimatedCircularProgress>
                         </View>
                     </View>    
                 </Card>
-                <Card style={{flex:2}}>
-                    <View style={{flex:1}}>
-                        <PrimaryText style={{flex:1,color:stringConstant.PRIMARY_FONT_COLOR,fontSize:18,marginBottom:5}}>
-                            Overview
-                        </PrimaryText>
-                        <SecondaryText style={{color:stringConstant.SECONDARY_FONT_COLOR,fontSize:15}}>
-                            {props.data.overview}
-                        </SecondaryText>
-                    </View>
-                    <View style={{flex:1}}>
-                        <PrimaryText style={{flex:1,color:stringConstant.PRIMARY_FONT_COLOR,fontSize:18,marginBottom:5}}>
-                            Feature Crew
-                        </PrimaryText>
-                        <CrewMembers crews={crews}/>
-                    </View>
-                </Card>
+                <Overview crew={props.crew} data={props.data} />
             </View>
             </Content>  
             <Footer style={{backgroundColor:stringConstant.APP_BLACKGROUND_COLOR}}>         
@@ -94,6 +90,39 @@ const DetailScreen = (props) => {
         </Container>                                         
         ) 
 };
+
+const Overview = (props)=>{
+    let crews=[{}];
+    
+    const a = props.crew.map((c)=>{
+        const job = c.job
+        if(FIELDS.includes(job)) {
+             const role = c.job;
+             const name = c.name;
+             const obj = {role,name};
+             crews.push(obj);
+        }
+     }).filter(d=>d);
+
+    return(
+    <Card style={{flex:2}}>
+        <View style={{flex:1}}>
+            <PrimaryText style={{flex:1,color:stringConstant.PRIMARY_FONT_COLOR,fontSize:18,marginBottom:5}}>
+                Overview
+            </PrimaryText>
+            <SecondaryText style={{color:stringConstant.SECONDARY_FONT_COLOR,fontSize:15}}>
+                {props.data.overview}
+            </SecondaryText>
+        </View>
+        <View style={{flex:1}}>
+            <PrimaryText style={{flex:1,color:stringConstant.PRIMARY_FONT_COLOR,fontSize:18,marginBottom:5}}>
+                Feature Crew
+            </PrimaryText>
+            <CrewMembers crews={crews}/>
+        </View>
+    </Card>
+    )
+}
 
 const FooterComponent = (props)=>{
     return(       
@@ -137,7 +166,6 @@ const FooterButton = (props) =>{
 const CrewMembers=(props)=>{
     const members = [];
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});    
-    
     return(
         <View style={{flex:1}}>
             <ListView contentContainerStyle={{ flexDirection: 'row',flexWrap: 'wrap'}}

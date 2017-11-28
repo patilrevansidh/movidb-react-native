@@ -53,14 +53,12 @@ class Detail extends Component {
                  favorites=this.props.list.favorites;
                  favorites = util.uniqueCalculator(favorites,id);
              this.props.markFavAction(favorites);
-             console.log("favorites",favorites)
              break;
          case stringConstant.BOOKMARK :
             let bookmarks=[];
                 bookmarks = this.props.list.bookmarks;
                 bookmarks = util.uniqueCalculator(bookmarks,id);
             this.props.markBookAction(bookmarks);
-            console.log("favorites",bookmarks)
             break;
          default :
              break;
