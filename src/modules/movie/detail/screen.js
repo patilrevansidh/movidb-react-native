@@ -65,14 +65,14 @@ const DetailScreen = (props) => {
                                 </PrimaryText>                            
                         </View>
                         <View style={detailStyles.userScoreHolder}>
-                            {/* <AnimatedCircularProgress size={50} width={4} fill={props.data.vote_average*10} tintColor={stringConstant.PRIMARY_FONT_COLOR} backgroundColor={stringConstant.GREY_COLOR}>
+                            <AnimatedCircularProgress size={50} width={4} fill={props.data.vote_average*10} tintColor={stringConstant.PRIMARY_FONT_COLOR} backgroundColor={stringConstant.GREY_COLOR}>
                                     {(fill) => (
                                         <SecondaryText style={{position:'absolute',marginTop:15,marginLeft:10}}>
                                             { props.data.vote_average*10}%
                                         </SecondaryText>
                                         )
                                     }
-                            </AnimatedCircularProgress> */}
+                            </AnimatedCircularProgress>
                         </View>
                     </View>    
                 </Card>
