@@ -5,7 +5,7 @@ import MovieCard from './common/card';
 import {Container, PrimaryText} from '../../../common/components';
 
 const MoviListContainer =(props)=> {
-        const list = props.data ?
+        const list = props.data.length >0 ?
                                 <FlatList
                                     data={props.data}
                                     renderItem={
@@ -17,7 +17,7 @@ const MoviListContainer =(props)=> {
                                         }
                                     keyExtractor={(item, index) => index}
                                 />
-                                : <PrimaryText>No Movies Found</PrimaryText>
+                                : <PrimaryText style={{textAlign:"center"}}>No Movies Found</PrimaryText>
         return list
 }
 

@@ -42,17 +42,17 @@ class CardContainer extends Component {
                     if(this.props.list.favorites){
                         if(this.props.list.favorites.includes(l.id)) {
                             return l
-                        }else {
-                            return []
                         }
+                    }else {
+                        return []
                     }
                 }else if(this.state.filters == stringConstant.BOOKMARK) {
                     if(this.props.list.bookmarks) {
                         if(this.props.list.bookmarks.includes(l.id)) {
                             return l
-                        }else {
-                            []
                         }
+                    }else {
+                        return []
                     }                   
                 }  
             }).filter(d=>d);
