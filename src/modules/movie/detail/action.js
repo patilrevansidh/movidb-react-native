@@ -9,11 +9,9 @@ export const fetchMovieDetail= (id)=> {
         dispatch({type : FETCHING_MOVIE});
         try {
             const crew = await movieService.getFeatureCrew(id);
-            const result = await movieService.getMovieDetail(id);    
-            console.log(result)            
+            const result = await movieService.getMovieDetail(id);            
             dispatch({type: FETCH_MOVIE_DETAIL_SUCCESS,payload:{'movie':result._bodyInit,'crew':crew._bodyInit}});                      
         } catch (error) {      
-            console.log(error)      
             dispatch({type : FETCH_MOVIE_DETAIL_FAIL});
         }
     }

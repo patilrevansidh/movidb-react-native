@@ -5,7 +5,7 @@ import MovieCard from './common/card';
 import {Container, PrimaryText} from '../../../common/components';
 
 const MoviListContainer =(props)=> {
-        const list = props.data.length >0 ?
+        const list = props.data.length !==0 ?
                                 <FlatList
                                     data={props.data}
                                     renderItem={

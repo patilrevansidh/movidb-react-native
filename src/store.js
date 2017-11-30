@@ -24,7 +24,7 @@ const configureStore = () => {
     const store = createStore(
         reducer,
         compose(
-            applyMiddleware(thunk, logger),
+            applyMiddleware(thunk),
             offline(myConfig),
             autoRehydrate()
         )
