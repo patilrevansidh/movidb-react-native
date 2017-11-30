@@ -28,8 +28,8 @@ class Detail extends Component {
     render() {
         if(this.props.movieDetail.dowLoaded)  {
             return <DetailScreen 
-                        isBookMarked = {this.props.list.bookmarks.includes(this.props.navigation.state.params.movieId)}
-                        isFavMarked = {this.props.list.favorites.includes(this.props.navigation.state.params.movieId)}
+                        isBookMarked = { this.props.list.bookmarks ? this.props.list.bookmarks.includes(this.props.navigation.state.params.movieId) : false}
+                        isFavMarked = { this.props.list.favorites ? this.props.list.favorites.includes(this.props.navigation.state.params.movieId) : false}
                         onFooterPress={this.handleFooterPress.bind(this)}
                         crew={this.props.movieDetail.crew.crew}
                         data={this.props.movieDetail.movie}/>

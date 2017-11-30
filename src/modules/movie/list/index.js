@@ -39,20 +39,27 @@ class CardContainer extends Component {
         if(this.state.filters)    {
             data = this.props.list.list.map((l)=>{
                 if(this.state.filters == stringConstant.FAVORITE){
-                    if(this.props.list.favorites.includes(l.id)) {
-                        return l
+                    if(this.props.list.favorites.length >0){
+                        if(this.props.list.favorites.includes(l.id)) {
+                            return l
+                        }
                     }
                 }else {
-                    if(this.props.list.bookmarks.includes(l.id)) {
-                        return l
-                    }
+                    if(this.props.list.bookmarks.length >0) {
+                        if(this.props.list.bookmarks.includes(l.id)) {
+                            return l
+                        }
+                    }                   
                 }  
             }).filter(d=>d);
             // return <MoviList 
             //             catergories={this.props.list.catergories}
             //             data={data}
             //             onDetailPress={this.handleDetailPress.bind(this)}/>
-        }else {
+        }else if(this.state.filters) {
+            <Text style={listStyle.noDataFoundStyle}>No Movies Found</Text> 
+        }
+        else {
             if(this.state.searchMovie.length > 2 && this.props.list.searchList) {
                 data=this.props.list.searchList
             }else {
