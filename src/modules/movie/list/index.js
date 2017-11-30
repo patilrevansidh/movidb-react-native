@@ -36,18 +36,22 @@ class CardContainer extends Component {
     render() {   
         const message = this.state.searchMovie.length > 2 ? 'Searching movie...' : 'Loading movie...';
         let data=[];
-        if(this.state.filters)    {
+        if(this.state.filters){
             data = this.props.list.list.map((l)=>{
                 if(this.state.filters == stringConstant.FAVORITE){
-                    if(this.props.list.favorites.length >0){
+                    if(this.props.list.favorites){
                         if(this.props.list.favorites.includes(l.id)) {
                             return l
+                        }else {
+                            return []
                         }
                     }
-                }else {
-                    if(this.props.list.bookmarks.length >0) {
+                }else if(this.state.filters == stringConstant.BOOKMARK) {
+                    if(this.props.list.bookmarks) {
                         if(this.props.list.bookmarks.includes(l.id)) {
                             return l
+                        }else {
+                            []
                         }
                     }                   
                 }  
