@@ -8,15 +8,13 @@ import {
     createReduxBoundAddListener,
     createReactNavigationReduxMiddleware,
   } from 'react-navigation-redux-helpers';
-import codePush from "react-native-code-push";
-
+  
 const store = configureStore();
 
 const addListener = createReduxBoundAddListener("root");
   
 class App extends Component {
     componentDidMount() {
-        console.log("consonole ")
         BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     }
     
@@ -57,7 +55,4 @@ const MoviDb = () => (
     </Provider>
 );
 
-
-const MyApp = codePush(MoviDb);
-
-export default MyApp;
+export default MoviDb;
