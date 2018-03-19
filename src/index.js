@@ -4,9 +4,15 @@ import configureStore from './store';
 import {Root} from './routes';
 import {addNavigationHelpers, NavigationActions} from 'react-navigation';
 import {BackHandler} from 'react-native';
-
+import {
+    createReduxBoundAddListener,
+    createReactNavigationReduxMiddleware,
+  } from 'react-navigation-redux-helpers';
+  
 const store = configureStore();
 
+const addListener = createReduxBoundAddListener("root");
+  
 class App extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
@@ -24,15 +30,15 @@ class App extends Component {
       dispatch(NavigationActions.back());
       return true;
     };
-
-    
     
     render() {
-    const { dispatch, nav } = this.props;        
+      const { dispatch, nav } = this.props;        
       return (
-        <Root
-            navigation={addNavigationHelpers({ dispatch, state: nav })}
-        />
+        <Root navigation={addNavigationHelpers({
+            dispatch: this.props.dispatch,
+            state: this.props.nav,
+            addListener,
+        })} />
       );
     }
 }
@@ -40,7 +46,7 @@ const mapStateToProps = (state) => ({
     nav: state.nav
 });
   
-  
+
 const AppWithNavigationState = connect(mapStateToProps)(App);
   
 const MoviDb = () => (
