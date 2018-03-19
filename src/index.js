@@ -16,7 +16,6 @@ const addListener = createReduxBoundAddListener("root");
   
 class App extends Component {
     componentDidMount() {
-        console.log("consonole ")
         BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
     }
     
