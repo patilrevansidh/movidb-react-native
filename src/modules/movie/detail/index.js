@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, ToastAndroid } from 'react-native';
 import detailService from './service';
 import DetailScreen from './screen';
 import {Spinner} from '../../../common/components';
@@ -17,6 +17,7 @@ class Detail extends Component {
 
     state = {detail:'',crew:{},showLoader:false}
     componentDidMount() {
+        ToastAndroid.show("code push imeplemented",ToastAndroid.LONG);
         this.fetchDetail();
     }
     

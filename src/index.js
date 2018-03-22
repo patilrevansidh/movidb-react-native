@@ -8,6 +8,8 @@ import {
     createReduxBoundAddListener,
     createReactNavigationReduxMiddleware,
   } from 'react-navigation-redux-helpers';
+import codePush from "react-native-code-push";
+
   
 const store = configureStore();
 
@@ -55,4 +57,4 @@ const MoviDb = () => (
     </Provider>
 );
 
-export default MoviDb;
+export default codePush(MoviDb);
