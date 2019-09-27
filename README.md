@@ -7,3 +7,6 @@ listed movies in cards. Can see movie details and search. view movies available 
 2. cd movidb
 3. npm install
 4. npm start
+
+
+Code Push implemented. Offline 
