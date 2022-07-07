@@ -10,7 +10,7 @@
     "appcenter": "^1.0.1",
     "appcenter-analytics": "^1.0.1",
     "appcenter-crashes": "^1.0.1",
-    "moment": "^2.19.2",
+    "moment": "^2.29.4",
     "native-base": "^2.3.3",
     "react": "16.0.0",
     "react-native": "0.50.3",
